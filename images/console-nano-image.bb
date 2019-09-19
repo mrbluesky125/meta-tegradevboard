@@ -9,6 +9,9 @@ inherit core-image
 
 CORE_OS = " \
     openssh openssh-keygen openssh-sftp-server \
+    autossh \
+    dnsmasq \
+    hostapd \
     tzdata \
 "
 
