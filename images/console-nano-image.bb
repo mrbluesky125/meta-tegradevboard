@@ -49,6 +49,7 @@ DEV_SDK_INSTALL = " \
 DEV_EXTRAS = " \
     ntp \
     ntp-tickadj \
+    rt-tests \
 "
 
 EXTRA_TOOLS_INSTALL = " \
