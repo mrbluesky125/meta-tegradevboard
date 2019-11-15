@@ -20,7 +20,7 @@ MD5SUM_FLATBUFFER = "02c64880acb89dbd57eebacfd67200d8"
 SHA256SUM_FLATBUFFER = "3f4a286642094f45b1b77228656fbd7ea123964f19502f9ecfd29933fd23a50b"
 MD5SUM_FFT = "72dff55737b580d98008517269471b23"
 SHA256SUM_FFT = "ada7e99087c4ed477bfdf11413f2ba8db8a840ba9bbf8ac94f4f3972e2a7cec9"
-PR = "r3"
+PR = "r5"
 SRC_URI = "git://github.com/tensorflow/tensorflow.git;branch=r2.1;protocol=https \
     https://bitbucket.org/eigen/eigen/get/afc120bc03bd.tar.gz;md5sum=${MD5SUM_EIGEN};sha256sum=${SHA256SUM_EIGEN} \
     https://github.com/google/googletest/archive/release-1.8.0.tar.gz;md5sum=${MD5SUM_GTEST};sha256sum=${SHA256SUM_GTEST} \
@@ -99,21 +99,7 @@ do_install() {
     install -d ${D}${libdir}
     install -m 0644 ${S}/tensorflow/lite/tools/make/gen/${TARGET_OS}_${TUNE_ARCH}/lib/libtensorflow-lite.a ${D}${libdir}/
     install -d ${D}${includedir}/tensorflow/lite
-    install -m 0644 ${S}/tensorflow/lite/*.h ${D}${includedir}/tensorflow/lite/
-    install -d ${D}${includedir}/tensorflow/lite/c
-    install -m 0644 ${S}/tensorflow/lite/c/*.h ${D}${includedir}/tensorflow/lite/c/
-    install -d ${D}${includedir}/tensorflow/lite/core/
-    install -m 0644 ${S}/tensorflow/lite/core/*.h ${D}${includedir}/tensorflow/lite/core/
-    install -d ${D}${includedir}/tensorflow/lite/core/api/
-    install -m 0644 ${S}/tensorflow/lite/core/api/*.h ${D}${includedir}/tensorflow/lite/core/api/
-    install -d ${D}${includedir}/tensorflow/lite/kernels
-    install -m 0644 ${S}/tensorflow/lite/kernels/*.h ${D}${includedir}/tensorflow/lite/kernels/
-    install -d  ${D}${includedir}/tensorflow/lite/profiling/
-    install -m 0644 ${S}/tensorflow/lite/profiling/*.h ${D}${includedir}/tensorflow/lite/profiling/
-    install -d ${D}${includedir}/tensorflow/lite/schema/
-    install -m 0644 ${S}/tensorflow/lite/schema/*.h ${D}${includedir}/tensorflow/lite/schema/
-    install -d ${D}${includedir}/tensorflow/lite/tools/
-    install -m 0644 ${S}/tensorflow/lite/tools/*.h ${D}${includedir}/tensorflow/lite/tools/
+    (find ${S}/tensorflow/lite -name '*.h' -print | tar --create --files-from -) | (cd ${D}${includedir}/tensorflow/lite && tar xvfp -)
     install -d ${D}${libdir}/pkgconfig
     install -m 0644 ${WORKDIR}/tensorflow-lite.pc.in ${D}${libdir}/pkgconfig/tensorflow-lite.pc
     sed -i 's:@version@:${PV}:g
