@@ -100,6 +100,8 @@ do_install() {
     install -m 0644 ${S}/tensorflow/lite/tools/make/gen/${TARGET_OS}_${TUNE_ARCH}/lib/libtensorflow-lite.a ${D}${libdir}/
     install -d ${D}${includedir}/tensorflow/lite
     (cd ${S}/tensorflow/lite && find . -name '*.h' -print | tar --create --files-from -) | (cd ${D}${includedir}/tensorflow/lite && tar xvfp -)
+    install -d ${D}${includedir}/absl
+    (cd ${S}/tensorflow/lite/tools/make/downloads/absl/absl && find . -name '*.h' -print | tar --create --files-from -) | (cd ${D}${includedir}/absl && tar xvfp -)
     install -d ${D}${libdir}/pkgconfig
     install -m 0644 ${WORKDIR}/tensorflow-lite.pc.in ${D}${libdir}/pkgconfig/tensorflow-lite.pc
     sed -i 's:@version@:${PV}:g
