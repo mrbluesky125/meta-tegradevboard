@@ -20,7 +20,7 @@ MD5SUM_FLATBUFFER = "02c64880acb89dbd57eebacfd67200d8"
 SHA256SUM_FLATBUFFER = "3f4a286642094f45b1b77228656fbd7ea123964f19502f9ecfd29933fd23a50b"
 MD5SUM_FFT = "72dff55737b580d98008517269471b23"
 SHA256SUM_FFT = "ada7e99087c4ed477bfdf11413f2ba8db8a840ba9bbf8ac94f4f3972e2a7cec9"
-PR = "r2"
+PR = "r3"
 SRC_URI = "git://github.com/tensorflow/tensorflow.git;branch=r2.1;protocol=https \
     https://bitbucket.org/eigen/eigen/get/afc120bc03bd.tar.gz;md5sum=${MD5SUM_EIGEN};sha256sum=${SHA256SUM_EIGEN} \
     https://github.com/google/googletest/archive/release-1.8.0.tar.gz;md5sum=${MD5SUM_GTEST};sha256sum=${SHA256SUM_GTEST} \
@@ -48,7 +48,7 @@ CXXFLAGS_append = " -O3 -DNDEBUG -fPIC -DGEMMLOWP_ALLOW_SLOW_SCALAR_FALLBACK \
 LDFLAGS_remove = "-Wl,-O1"
 CXXFLAGS_append = " -O3 -DNDEBUG -fPIC -DGEMMLOWP_ALLOW_SLOW_SCALAR_FALLBACK \
     -I${STAGING_INCDIR}"
-LIBS = "-lstdc++ -lpthread -lm -lz -ldl"
+LIBS = "-lstdc++ -lpthread -lm -lz -ldl -lrt"
 BUILD_DEPS_DOWNLOAD_DIR_PREFIX = "${S}/tensorflow/lite/tools/make/downloads/"
 BUILD_WITH_NNAPI = "false"
 do_cp_downloaded_build_deps() {
@@ -85,7 +85,7 @@ EXTRA_OEMAKE = "\
     'LIBS=${LIBS}' \
     'TARGET=${TARGET_OS}' \
     'TARGET_ARCH=${TUNE_ARCH}' \
-    'BUILD_WITH_NNAPI=false'"
+    "
 
 do_configure() {
     oe_runmake -f tensorflow/lite/tools/make/Makefile clean
