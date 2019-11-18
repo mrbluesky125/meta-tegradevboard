@@ -4,8 +4,8 @@ HOMEPAGE = "https://www.tensorflow.org/lite"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=64a34301f8e355f57ec992c2af3e5157"
 
-MD5SUM_EIGEN = "c7dffca8a2dca6ed464c700ba84dc3c1"
-SHA256SUM_EIGEN = "091d1a3124ea41ac2e70e30028365d78d43a1c617a26445aef15e140e4fab1dd"
+MD5SUM_EIGEN = "7b1900b6e4971a024becadeb62fd0c03"
+SHA256SUM_EIGEN = "f3d69ac773ecaf3602cb940040390d4e71a501bb145ca9e01ce5464cf6d4eb68"
 MD5SUM_FARMHASH = "f039a65a7f62bdb6c4b4c8a732638d80"
 SHA256SUM_FARMHASH = "6560547c63e4af82b0f202cb710ceabb3f21347a4b996db565a411da5b17aba0"
 MD5SUM_GEMMLOWP = "09cf63d1d388a2753de3323684da70ed"
@@ -20,9 +20,9 @@ MD5SUM_FLATBUFFER = "02c64880acb89dbd57eebacfd67200d8"
 SHA256SUM_FLATBUFFER = "3f4a286642094f45b1b77228656fbd7ea123964f19502f9ecfd29933fd23a50b"
 MD5SUM_FFT = "72dff55737b580d98008517269471b23"
 SHA256SUM_FFT = "ada7e99087c4ed477bfdf11413f2ba8db8a840ba9bbf8ac94f4f3972e2a7cec9"
-PR = "r7"
-SRC_URI = "git://github.com/tensorflow/tensorflow.git;tag=v2.0.0;protocol=https \
-    https://bitbucket.org/eigen/eigen/get/afc120bc03bd.tar.gz;md5sum=${MD5SUM_EIGEN};sha256sum=${SHA256SUM_EIGEN} \
+PR = "r0"
+SRC_URI = "git://github.com/tensorflow/tensorflow.git;branch=r2.0;protocol=https \
+    https://bitbucket.org/eigen/eigen/get/049af2f56331.tar.gz;md5sum=${MD5SUM_EIGEN};sha256sum=${SHA256SUM_EIGEN} \
     https://github.com/google/googletest/archive/release-1.8.0.tar.gz;md5sum=${MD5SUM_GTEST};sha256sum=${SHA256SUM_GTEST} \
     https://github.com/abseil/abseil-cpp/archive/48cd2c3f351ff188bc85684b84a91b6e6d17d896.tar.gz;md5sum=${MD5SUM_ABSLCPP};sha256sum=${SHA256SUM_ABSLCPP} \
     https://github.com/intel/ARM_NEON_2_x86_SSE/archive/master.zip;md5sum=${MD5SUM_NEON2SSE};sha256sum=${SHA256SUM_NEON2SSE} \
@@ -32,7 +32,7 @@ SRC_URI = "git://github.com/tensorflow/tensorflow.git;tag=v2.0.0;protocol=https 
     https://storage.googleapis.com/mirror.tensorflow.org/www.kurims.kyoto-u.ac.jp/~ooura/fft2d.tgz;md5sum=${MD5SUM_FFT};sha256sum=${SHA256SUM_FFT}\
     file://tensorflow-lite.pc.in \
     "
-
+SRCREV = "64c3d382cadf7bbe8e7e99884bede8284ff67f56"
 
 S = "${WORKDIR}/git"
 
@@ -60,7 +60,7 @@ do_cp_downloaded_build_deps() {
     mkdir -p ${BUILD_DEPS_DOWNLOAD_DIR_PREFIX}flatbuffers
     mkdir -p ${BUILD_DEPS_DOWNLOAD_DIR_PREFIX}fft2d
 
-    cp -rf ${WORKDIR}/eigen-eigen-afc120bc03bd/* ${BUILD_DEPS_DOWNLOAD_DIR_PREFIX}eigen
+    cp -rf ${WORKDIR}/eigen-eigen-049af2f56331/* ${BUILD_DEPS_DOWNLOAD_DIR_PREFIX}eigen
     cp -rf ${WORKDIR}/gemmlowp-12fed0cd7cfcd9e169bf1925bc3a7a58725fdcc3/* ${BUILD_DEPS_DOWNLOAD_DIR_PREFIX}gemmlowp
     cp -rf ${WORKDIR}/googletest-release-1.8.0/* ${BUILD_DEPS_DOWNLOAD_DIR_PREFIX}googletest
     cp -rf ${WORKDIR}/abseil-cpp-48cd2c3f351ff188bc85684b84a91b6e6d17d896/* ${BUILD_DEPS_DOWNLOAD_DIR_PREFIX}absl
