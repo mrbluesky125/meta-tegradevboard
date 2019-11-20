@@ -56,6 +56,9 @@ X11_EXTRAS = " \
     shutdown-desktop \
     x11vnc \
  "
+PYTHON_EXTRAS = " \
+    python-pip \
+    "
 
 IMAGE_INSTALL += " \
     ${DEEP_LEARING_TOOLS} \
