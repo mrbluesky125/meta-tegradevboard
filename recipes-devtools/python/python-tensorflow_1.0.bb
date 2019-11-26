@@ -1,26 +1,43 @@
 DESCRIPTION = "Adafruit BBIO"
 HOMEPAGE = "https://github.com/adafruit/adafruit-beaglebone-io-python/"
 SECTION = "devel/python"
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://README.rst;md5=df95471969e3e40ce701b0ff86fe4568"
+LICENSE = "CLOSED"
+LIC_FILES_CHKSUM = ""
 
-SRC_URI[md5sum] = "8babec0c13828c251ea6907e113d5c26"
-SRC_URI[sha256sum] = "4b9aef88de437aa08185172a7d09ee7ef62e448acb2d71f77c9c5e0f0f4b9b97"
-
-#SRC_URI[md5sum] = "75c676577216244b74958d02900480b5"
-#SRC_URI[sha256sum] = "9e8255aefb3470706ca2bb63432e4ceb697de2ab1b0be69904456840da0dafd8"
-
-inherit setuptools
-
-#PYPI_PACKAGE = "Adafruit_BBIO"
-SRC_URI = "https://files.pythonhosted.org/packages/bd/ee/dfbf0521287fc4cd8870427618b5d41c6a292f6d640af7b4c407329d7031/Adafruit_BBIO-${PV}.tar.gz"
-
-S = "${WORKDIR}/Adafruit_BBIO-${PV}"
+SRC_URI[md5sum] = "666aeb76736f51783b69fa8587b6a692"
+SRC_URI[sha256sum] = "a79fcb04092afa2737a45ff81cfc74f4423d239bfe642159eb34c90233900157"
 
 
-RDEPENDS_${PN} = "python"
+SRCNAME = "Tensorflow-gpu"	
+SRC_URI = "https://raw.githubusercontent.com/PINTO0309/Tensorflow-bin/master/tensorflow-2.0.0-cp37-cp37m-linux_aarch64.whl"
 
-BBCLASSEXTEND = "native"
+DEPENDS += "python3-pip-native \
+	python3-wheel-native \
+	zip-native \
+	"
+inherit python3-dir
+S = "${WORKDIR}/"
 
-CLEANBROKEN="1"
+export PYTHON_BIN_PATH="${PYTHON}"
+export PYTHON_LIB_PATH="${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages"
 
+
+FILES_${PN} += "\                                                                                   
+    /python3.7-packages \                                            
+"
+
+export STAGING_LIBDIR 
+export STAGING_INCDIR 
+
+do_install() {
+    install -d ${D}/python3.7-packages/
+    echo ${STAGING_LIBDIR}/${PYTHON_DIR}/site-packages
+    pip3 install ${S}tensorflow_gpu-2.0.0-cp37-cp37m-manylinux2010_x86_64.whl
+    zip ${D}/python3.7-packages/tensorflow.zip -r ${STAGING_LIBDIR_NATIVE}/${PYTHON_DIR}/site-packages
+    #cp -R ${STAGING_LIBDIR_NATIVE}/${PYTHON_DIR}/site-packages ${D}/python3.7-packages/
+}
+
+do_package_qa[noexec] = "1"
+
+
+INSANE_SKIP_${PN}_append = "already-stripped"
