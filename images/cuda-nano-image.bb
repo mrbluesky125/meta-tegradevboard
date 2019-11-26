@@ -9,6 +9,7 @@ require console-nano-image.bb
 
 DEEP_LEARING_TOOLS = " \
     tensorrt \
+    tensorflow-lite \
     cudnn \
     cudnn-dev \
     opencv \
@@ -58,10 +59,12 @@ X11_EXTRAS = " \
  "
 PYTHON_EXTRAS = " \
     python-pip \
+    python-tensorflow \
     "
 
 IMAGE_INSTALL += " \
     ${DEEP_LEARING_TOOLS} \
+    ${PYTHON_EXTRAS} \
     ${X11_EXTRAS} \
     ${X11_PACKAGES} \
 "

@@ -54,12 +54,17 @@ DEV_EXTRAS = " \
 EXTRA_TOOLS_INSTALL = " \
     bzip2 \
     ethtool \
+    e2fsprogs \
     findutils \
     i2c-tools \
     iperf3 \
     iproute2 \
     less \
+    nano \
     netcat \
+    python \
+    python3 \
+    python3-pip \
     procps \
     sysfsutils \
     tcpdump \
