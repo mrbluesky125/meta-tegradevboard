@@ -59,14 +59,18 @@ X11_EXTRAS = " \
  "
 PYTHON_EXTRAS = " \
     python-pip \
-    python-tensorflow \
     "
-
+QT_TOOLS = " \
+    qtbase \
+    qtbase-plugins \
+    qtserialport \
+    qtwebglplugin \
+"
 IMAGE_INSTALL += " \
-    ${DEEP_LEARING_TOOLS} \
     ${PYTHON_EXTRAS} \
     ${X11_EXTRAS} \
     ${X11_PACKAGES} \
+    ${QT_TOOLS} \
 "
 
 export IMAGE_BASENAME = "cuda-nano-image"

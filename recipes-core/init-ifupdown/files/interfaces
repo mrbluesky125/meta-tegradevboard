@@ -2,30 +2,4 @@ auto lo
 iface lo inet loopback
 
 auto eth0
-#h2o-control
-iface eth0 inet static
-       address 192.251.1.1
-       netmask 255.255.255.0
-       network 192.252.1.0
-       broadcast 192.251.1.255
-
-#h2o-control
-up sysctl -w net.ipv4.ip_forward=1
-up iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-
-
-auto wlan0
-iface wlan0 inet static
-       address 192.252.1.1
-       netmask 255.255.255.0
-       network 192.252.1.0
-       broadcast 192.252.1.255
-auto usb0
-iface usb0 inet static
-       address 192.253.1.1
-       netmask 255.255.255.0
-       network 192.253.1.0
-       broadcast 192.253.1.255
-       up route add -host 192.253.1.1 usb0
-
-dns-nameservers 8.8.8.8 8.8.4.4
+iface eth0 inet dhcp
